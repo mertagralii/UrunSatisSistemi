@@ -1,8 +1,68 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Satış Sayfası";
+    var products = new List<dynamic>
+    {
+        new { Name = "Domates", Stock = 13, Price = 3, Image = "tomato.jpg" },
+        new { Name = "Elma", Stock = 10, Price = 2, Image = "apple.jpg" },
+        new { Name = "Armut", Stock = 5, Price = 4, Image = "pear.jpg" },
+        new { Name = "Muz", Stock = 8, Price = 6, Image = "banana.jpg" },
+        new { Name = "Karpuz", Stock = 3, Price = 10, Image = "watermelon.jpg" },
+        new { Name = "Üzüm", Stock = 20, Price = 7, Image = "grape.jpg" },
+        new { Name = "Çilek", Stock = 15, Price = 5, Image = "strawberry.jpg" },
+        new { Name = "Kiraz", Stock = 12, Price = 8, Image = "cherry.jpg" },
+        new { Name = "Domates", Stock = 13, Price = 3, Image = "tomato.jpg" },
+        new { Name = "Elma", Stock = 10, Price = 2, Image = "apple.jpg" },
+        new { Name = "Armut", Stock = 5, Price = 4, Image = "pear.jpg" },
+        new { Name = "Muz", Stock = 8, Price = 6, Image = "banana.jpg" }
+    };
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container mt-4">
+    <h1 class="text-center">Ürün Satış Sistemi</h1>
+    <div class="row">
+        <!-- Ürün Kartları -->
+        <div class="col-md-8">
+            <div class="row row-cols-1 row-cols-md-4 g-4">
+                @foreach (var item in products)
+                {
+                    <div class="col">
+                        <div class="card">
+                            <img src="@item.Image" class="card-img-top" alt="@item.Name">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">@item.Name</h5>
+                                <p>Stok: @item.Stock</p>
+                                <p>Fiyat: @item.Price TL</p>
+                                <input type="radio" name="product" value="@item.Name">
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <!-- Satış Paneli -->
+        <div class="col-md-4 position-sticky" style="top: 20px;">
+            <div class="border p-3 mb-3 bg-white shadow-sm">
+                <h4>Satış Yap</h4>
+                <div>
+                    <input type="radio" name="payment" value="cash"> Nakit
+                    <input type="radio" name="payment" value="card"> Kredi Kartı
+                </div>
+                <input type="text" class="form-control my-2" placeholder="Alınan Para">
+                <button class="btn btn-primary w-100">Ödeme Al</button>
+            </div>
+            <div class="border p-3 bg-white shadow-sm">
+                <h4>Kazanç Raporu</h4>
+                <p>Toplam Ciro: 500 TL</p>
+                <p>Kar: 350 TL</p>
+            </div>
+        </div>
+    </div>
 </div>
+
+<style>
+    .position-sticky {
+        position: -webkit-sticky;
+        position: sticky;
+    }
+</style>
