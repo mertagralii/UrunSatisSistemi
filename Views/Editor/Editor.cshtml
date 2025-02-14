@@ -1,54 +1,68 @@
-﻿@{
-    ViewData["Title"] = "Editor Policy";
+﻿@model List<Products>
+@{
+	ViewData["Title"] = "Editor Policy";
 }
 <div class="container mt-4">
-    <h1 class="text-center">Stok Yönetimi</h1>
+	<h1 class="text-center">Stok Yönetimi</h1>
 
-    <table class="table table-bordered mt-3">
-        <thead>
-            <tr>
-                <th>Ürün Adı</th>
-                <th>Alış Bedeli</th>
-                <th>Satış Bedeli</th>
-                <th>Stok</th>
-                <th>Görsel</th>
-                <th>İşlemler</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Domates</td>
-                <td><input type="number" class="form-control" value="1"></td>
-                <td><input type="number" class="form-control" value="3"></td>
-                <td><input type="number" class="form-control" value="30"></td>
-                <td><input type="text" class="form-control" placeholder="Görsel URL"></td>
-                <td>
-                    <button class="btn btn-primary">Güncelle</button>
-                    <button class="btn btn-danger">Ürünü Sil</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+	<table class="table table-bordered mt-3">
+		<thead>
+			<tr>
+				<th>Ürün Adı</th>
+				<th>Alış Bedeli</th>
+				<th>Satış Bedeli</th>
+				<th>Stok</th>
+				<th>Görsel</th>
+				<th>İşlemler</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var product in Model)
+			{
+				<tr>
+					<form method="post" autocomplete="off">
+						<input type="hidden" name="Id" value="@product.Id"  />
+					<td><input type="text" name="Name" class="form-control" value="@product.Name"></td>
+					<td><input type="number" name="PurchasePrice" class="form-control" value="@product.PurchasePrice"></td>
+					<td><input type="number" name="SalesPrice" class="form-control" value="@product.SalesPrice"></td>
+					<td><input type="number" name="Stok" class="form-control" value="@product.Stok"></td>
+					<td><input type="text" name="ImageURL" class="form-control" value="@product.ImageURL"></td>
+					<td>
+						<button type="submit" class="btn btn-primary" formaction="/Editor/UpdateProduct">Güncelle</button>
+						<button type="submit" class="btn btn-danger" formaction="/Editor/DeleteProduct/@product.Id">Ürünü Sil</button>
+					</td>
+					</form>
 
-    <h3>Ürün Ekle</h3>
-    <div class="row">
-        <div class="col-md-2">
-            <input type="text" class="form-control" placeholder="Ürün Adı">
-        </div>
-        <div class="col-md-2">
-            <input type="number" class="form-control" placeholder="Alış Bedeli">
-        </div>
-        <div class="col-md-2">
-            <input type="number" class="form-control" placeholder="Satış Bedeli">
-        </div>
-        <div class="col-md-2">
-            <input type="number" class="form-control" placeholder="Stok">
-        </div>
-        <div class="col-md-2">
-            <input type="text" class="form-control" placeholder="Görsel URL">
-        </div>
-        <div class="col-md-2">
-            <button class="btn btn-success w-100">Ekle</button>
-        </div>
-    </div>
+				</tr>
+			}
+
+		</tbody>
+	</table>
+
+	<h3>Ürün Ekle</h3>
+
+	<form action="/Editor/InsertProducts" method="post" autocomplete="off">
+		<div class="row">
+			<div class="col-md-2">
+				<input type="text" class="form-control" placeholder="Ürün Adı" name="Name">
+			</div>
+			<div class="col-md-2">
+				<input type="number" class="form-control" placeholder="Alış Bedeli" name="PurchasePrice">
+			</div>
+			<div class="col-md-2">
+				<input type="number" class="form-control" placeholder="Satış Bedeli" name="SalesPrice">
+			</div>
+			<div class="col-md-2">
+				<input type="number" class="form-control" placeholder="Stok" name="Stok">
+			</div>
+			<div class="col-md-2">
+				<input type="text" class="form-control" placeholder="Görsel URL" name="ImageURL">
+			</div>
+			<div class="col-md-2">
+				<button type="submit" class="btn btn-success w-100">Ekle</button>
+			</div>
+		</div>
+	</form>
+
+
 </div>

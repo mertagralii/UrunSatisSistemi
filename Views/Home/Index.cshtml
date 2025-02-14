@@ -1,20 +1,7 @@
-﻿@{
+﻿@model List<Products>
+@{
     ViewData["Title"] = "Satış Sayfası";
-    var products = new List<dynamic>
-    {
-        new { Name = "Domates", Stock = 13, Price = 3, Image = "tomato.jpg" },
-        new { Name = "Elma", Stock = 10, Price = 2, Image = "apple.jpg" },
-        new { Name = "Armut", Stock = 5, Price = 4, Image = "pear.jpg" },
-        new { Name = "Muz", Stock = 8, Price = 6, Image = "banana.jpg" },
-        new { Name = "Karpuz", Stock = 3, Price = 10, Image = "watermelon.jpg" },
-        new { Name = "Üzüm", Stock = 20, Price = 7, Image = "grape.jpg" },
-        new { Name = "Çilek", Stock = 15, Price = 5, Image = "strawberry.jpg" },
-        new { Name = "Kiraz", Stock = 12, Price = 8, Image = "cherry.jpg" },
-        new { Name = "Domates", Stock = 13, Price = 3, Image = "tomato.jpg" },
-        new { Name = "Elma", Stock = 10, Price = 2, Image = "apple.jpg" },
-        new { Name = "Armut", Stock = 5, Price = 4, Image = "pear.jpg" },
-        new { Name = "Muz", Stock = 8, Price = 6, Image = "banana.jpg" }
-    };
+    
 }
 
 <div class="container mt-4">
@@ -23,16 +10,16 @@
         <!-- Ürün Kartları -->
         <div class="col-md-8">
             <div class="row row-cols-1 row-cols-md-4 g-4">
-                @foreach (var item in products)
+                @foreach (var item in Model)
                 {
                     <div class="col">
                         <div class="card">
-                            <img src="@item.Image" class="card-img-top" alt="@item.Name">
+                            <img src="@item.ImageURL" class="card-img-top" alt="@item.Name">
                             <div class="card-body text-center">
                                 <h5 class="card-title">@item.Name</h5>
-                                <p>Stok: @item.Stock</p>
-                                <p>Fiyat: @item.Price TL</p>
-                                <input type="radio" name="product" value="@item.Name">
+                                <p>Stok: @item.Stok KG</p>
+                                <p>Fiyat: @item.SalesPrice TL</p>
+                                <input type="radio" name="product" value="@item.Name"> Seç
                             </div>
                         </div>
                     </div>

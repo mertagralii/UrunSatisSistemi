@@ -1,5 +1,6 @@
 using System.Data;
 using System.Diagnostics;
+using Dapper;
 using Microsoft.AspNetCore.Mvc;
 using UrunSatisSistemi.Models;
 
@@ -16,7 +17,8 @@ namespace UrunSatisSistemi.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var productList = _connection.Query<Products>("SELECT * FROM Products").ToList();
+            return View(productList);
         }
 
       
